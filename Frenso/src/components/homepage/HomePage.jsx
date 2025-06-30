@@ -1,0 +1,29 @@
+import { Grid } from '@mui/material';
+import Navigation from '../navigation/Navigation';
+import HomeSection from '../homesection/HomeSection';
+import RightPart from '../rightpart/RightPart';
+
+const HomePage = () => {
+  return (
+    <Grid container spacing={2} className="px-5 lg:px-10 lg:justify-between">
+      
+      {/* Left Navigation */}
+      <Grid item xs={0} lg={2.5} className="hidden lg:block relative">
+        <Navigation />
+      </Grid>
+
+      {/* Main Home Section */}
+      <Grid item xs={12} lg={6} className="relative">
+        <HomeSection />
+      </Grid>
+
+      {/* Right Sidebar */}
+      <Grid item xs={0} lg={3} className="hidden lg:block relative">
+        <RightPart />
+      </Grid>
+      
+    </Grid>
+  );
+};
+
+export default HomePage;
