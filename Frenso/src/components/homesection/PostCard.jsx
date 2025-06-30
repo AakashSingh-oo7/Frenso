@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -10,11 +10,16 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import ReplyModel from "./ReplyModel";
 
 const PostCard = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+    const [openReplyModal, setOpenReplyModal] = React.useState(false);
+    const handleOpenReplyModal = () => setOpenReplyModal(true);
+    const handleCloseReplyModal = () => setOpenReplyModal(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,9 +34,7 @@ const PostCard = () => {
     handleClose();
   };
 
-  const handleOpenReplyModel = () => {
-    console.log("Open reply model");
-  };
+
 
   const handleCreateRePost = () => {
     console.log("Create RePost");
@@ -40,7 +43,7 @@ const PostCard = () => {
     console.log("Like Post");
   };
   return (
-    <div>
+    <React.Fragment>
       {/* <div className='flex items-center font-semibold text-grey-700 py-2'>
             <RepeatIcon />
             <p>You RePost</p>
@@ -85,7 +88,10 @@ const PostCard = () => {
             </div>
           </div>
           <div className="mt-2">
-            <div className="cursor-pointer">
+            <div
+              onClick={() => navigate(`/post/${1}`)}
+              className="cursor-pointer"
+            >
               <p className="mb-2 p-0">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Eligendi!
@@ -100,7 +106,7 @@ const PostCard = () => {
               <div className="space-x-3 flex items-center text-gray-500">
                 <ChatBubbleOutlineIcon
                   className="cursor-pointer"
-                  onClick={handleOpenReplyModel}
+                  onClick={handleOpenReplyModal}
                 />
                 <p>43</p>
               </div>
@@ -136,14 +142,14 @@ const PostCard = () => {
               <div className="space-x-3 flex items-center text-gray-500">
                 <BarChartIcon
                   className="cursor-pointer"
-                  onClick={handleOpenReplyModel}
+                  onClick={handleOpenReplyModal}
                 />
                 <p>43</p>
               </div>
               <div className="space-x-3 flex items-center text-gray-500">
                 <FileUploadIcon
                   className="cursor-pointer"
-                  onClick={handleOpenReplyModel}
+                  onClick={handleOpenReplyModal}
                 />
                 <p>43</p>
               </div>
@@ -151,7 +157,10 @@ const PostCard = () => {
           </div>
         </div>
       </div>
-    </div>
+      <section>
+        <ReplyModel open={openReplyModal} handleClose={handleCloseReplyModal} />
+      </section>
+    </React.Fragment>
   );
 };
 
