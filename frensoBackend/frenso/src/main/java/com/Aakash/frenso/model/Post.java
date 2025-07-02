@@ -3,6 +3,7 @@ package com.Aakash.frenso.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,6 @@ public class Post {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     private String content;
@@ -36,4 +36,6 @@ public class Post {
 
     private boolean isReply;
     private boolean isPost;
+
+    private LocalDateTime createdAt;
 }
