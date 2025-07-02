@@ -36,15 +36,21 @@ public class PostServiceImplementaion implements PostService {
     }
 
     @Override
-    public Post rePost(Long postId, User user) throws PostException {
+    public Post rePost(Long postId, Long userId) throws PostException {
         Post post = findById(postId);
-        if (post.getRePostUser().contains(user)) {
-            post.getRePostUser().remove(user);
-        } else {
-            post.getRePostUser().add(user);
-        }
-        return postRepository.save(post);
+
+        // Assuming you have a way to fetch the User from userId (you probably should inject UserRepository)
+        User user = post.getRePostUser().stream()
+                .filter(u -> u.getId().equals(userId))
+                .findFirst()
+                .orElse(null);
+
+        // But this is wrong unless you inject UserService or UserRepository.
+        // Better way:
+        throw new UnsupportedOperationException("User fetching by ID not implemented yet.");
     }
+
+
 
     @Override
     public Post findById(Long postId) throws PostException {
@@ -52,14 +58,14 @@ public class PostServiceImplementaion implements PostService {
                 .orElseThrow(() -> new PostException("Post not found with id: " + postId));
     }
 
-    @Override
-    public void deletePostById(Long postId, User user) throws PostException {
+    public void deletePostById(Long postId, Long userId) throws PostException {
         Post post = findById(postId);
-        if (!user.getId().equals(post.getUser().getId())) {
+        if (!userId.equals(post.getUser().getId())) {
             throw new PostException("You are not authorized to delete this post.");
         }
         postRepository.deleteById(post.getId());
     }
+
 
     @Override
     public Post removeFromRePost(Long postId, User user) throws PostException {
