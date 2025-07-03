@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import Navigation from '../navigation/Navigation';
 import HomeSection from '../homesection/HomeSection';
+import Authentication from '../authentication/Authentication';
 import RightPart from '../rightpart/RightPart';
 import { Route, Routes } from 'react-router-dom';
 import Profile from '../profile/Profile';
@@ -18,7 +19,7 @@ const HomePage = () => {
       {/* Main Home Section */}
       <Grid item xs={12} lg={6} className="relative">
         <Routes>
-          <Route path="/" element={<HomeSection />} />
+          <Route path="/" element={<Authentication />} />
            <Route path="/home" element={<HomeSection />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/post/:id" element={<PostDetails />} />
